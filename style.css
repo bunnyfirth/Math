@@ -52,7 +52,7 @@ main {
   text-align: center;
 }
 
-.worksheet h2 {
+.worksheet h2, #flashOutput h2 {
   margin-bottom: 20px;
 }
 
@@ -68,6 +68,22 @@ main {
   border-bottom: 1px solid #ccc;
   padding: 5px;
   text-align: center;
+}
+
+.flash-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.flash-table th, .flash-table td {
+  border: 1px solid #000;
+  padding: 8px;
+  text-align: center;
+}
+
+.flash-table th {
+  background-color: #eee;
 }
 
 @media print {

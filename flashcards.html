@@ -28,15 +28,10 @@
         <label><input type="checkbox" value="exp"> Exponents</label>
       </fieldset>
 
-      <label>Number Range: <input type="number" id="flashStart" value="1"> to <input type="number" id="flashEnd" value="12"></label><br>
-      <label>Mode:
-        <select id="flashMode">
-          <option value="printable">Printable Flashcards</option>
-          <option value="answersheet">Answer Sheet</option>
-        </select>
-      </label><br>
-      <label><input type="checkbox" id="includeAnswers"> Include Answers</label><br>
-      <button type="button" onclick="startFlashcards()">Generate Flashcards</button>
+      <label>Number Range: <input type="number" id="flashStart" value="1"> to <input type="number" id="flashEnd" value="10"></label><br>
+      <label>Number of Flashcards per Sheet: <input type="number" id="flashPerSheet" value="20"></label><br>
+      <button type="button" onclick="generateFlashcards()">Generate Printable Flashcards</button>
+      <button type="button" onclick="generateOnlineFlashcards()">Start Online Flashcards</button>
     </form>
 
     <div id="flashOutput" class="printable"></div>
