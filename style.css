@@ -47,7 +47,6 @@ main {
   margin: auto;
 }
 
-/* Worksheet / Flashcards */
 .worksheet, #flashOutput {
   page-break-after: always;
   text-align: center;
@@ -71,10 +70,9 @@ main {
   text-align: center;
 }
 
-/* Print Styles */
 @media print {
   body * { visibility: hidden; }
-  #worksheetOutput, #flashOutput {
+  .printable, #worksheetOutput, #flashOutput {
     visibility: visible;
     position: absolute;
     top: 0;

@@ -31,16 +31,15 @@
       <label>Number Range: <input type="number" id="flashStart" value="1"> to <input type="number" id="flashEnd" value="12"></label><br>
       <label>Mode:
         <select id="flashMode">
-          <option value="digital">Digital Flashcards</option>
           <option value="printable">Printable Flashcards</option>
           <option value="answersheet">Answer Sheet</option>
         </select>
       </label><br>
       <label><input type="checkbox" id="includeAnswers"> Include Answers</label><br>
-      <button type="button" onclick="startFlashcards()">Start</button>
+      <button type="button" onclick="startFlashcards()">Generate Flashcards</button>
     </form>
 
-    <div id="flashOutput"></div>
+    <div id="flashOutput" class="printable"></div>
   </main>
 
   <script src="script.js"></script>

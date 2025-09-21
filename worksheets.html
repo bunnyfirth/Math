@@ -33,12 +33,13 @@
       <label>Number of Question Sheets: <input type="number" id="questionSheets" value="1"></label><br>
       <label>Number of Answer Sheets: <input type="number" id="answerSheets" value="1"></label><br>
 
-      <button type="button" onclick="generateWorksheets()">Generate</button>
+      <button type="button" onclick="generateWorksheets()">Generate Worksheets</button>
       <button type="button" onclick="printQuestions()">Print Worksheets</button>
       <button type="button" onclick="printAnswers()">Print Answer Sheets</button>
+      <button type="button" onclick="printBoth()">Print Both</button>
     </form>
 
-    <div id="worksheetOutput"></div>
+    <div id="worksheetOutput" class="printable"></div>
   </main>
 
   <script src="script.js"></script>
