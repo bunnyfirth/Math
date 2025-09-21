@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>Numble - Flashcards</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="favicon.png">
 </head>
 <body>
   <header>
@@ -17,11 +18,10 @@
 
   <main>
     <h2>Flashcards</h2>
-
     <form id="flashForm">
       <fieldset>
         <legend>Choose Math Types</legend>
-        <label><input type="checkbox" value="add"> Addition</label>
+        <label><input type="checkbox" value="add" checked> Addition</label>
         <label><input type="checkbox" value="sub"> Subtraction</label>
         <label><input type="checkbox" value="mul"> Multiplication</label>
         <label><input type="checkbox" value="div"> Division</label>
@@ -36,7 +36,6 @@
           <option value="answersheet">Answer Sheet</option>
         </select>
       </label><br>
-
       <button type="button" onclick="startFlashcards()">Start</button>
     </form>
 

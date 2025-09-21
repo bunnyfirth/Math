@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>Numble - Worksheets</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="favicon.png">
 </head>
 <body>
   <header>
@@ -17,11 +18,10 @@
 
   <main>
     <h2>Generate Worksheets</h2>
-
     <form id="worksheetForm">
       <fieldset>
         <legend>Choose Math Types</legend>
-        <label><input type="checkbox" value="add"> Addition</label>
+        <label><input type="checkbox" value="add" checked> Addition</label>
         <label><input type="checkbox" value="sub"> Subtraction</label>
         <label><input type="checkbox" value="mul"> Multiplication</label>
         <label><input type="checkbox" value="div"> Division</label>
@@ -29,10 +29,13 @@
       </fieldset>
 
       <label>Number Range: <input type="number" id="startNum" value="1"> to <input type="number" id="endNum" value="12"></label><br>
-      <label>Questions per Page: <input type="number" id="questionsPerPage" value="20"></label><br>
-      <label>Pages: <input type="number" id="numPages" value="1"></label><br>
+      <label>Questions per Sheet: <input type="number" id="questionsPerPage" value="20"></label><br>
+      <label>Number of Question Sheets: <input type="number" id="questionSheets" value="1"></label><br>
+      <label>Number of Answer Sheets: <input type="number" id="answerSheets" value="1"></label><br>
+
       <button type="button" onclick="generateWorksheets()">Generate</button>
-      <button type="button" onclick="window.print()">Print</button>
+      <button type="button" onclick="printQuestions()">Print Worksheets</button>
+      <button type="button" onclick="printAnswers()">Print Answer Key</button>
     </form>
 
     <div id="worksheetOutput"></div>
