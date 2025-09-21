@@ -7,10 +7,21 @@
 </head>
 <body>
   <h1>Flashcards</h1>
+
+  <label for="flashOperation">Choose Math Type:</label>
+  <select id="flashOperation">
+    <option value="add">Addition (+)</option>
+    <option value="sub">Subtraction (−)</option>
+    <option value="mul" selected>Multiplication (×)</option>
+    <option value="div">Division (÷)</option>
+    <option value="exp">Exponents (^)</option>
+  </select>
+
   <div id="flashcard">
     <p id="question">Click "New Card" to start!</p>
     <p id="answer" style="display:none;"></p>
   </div>
+
   <button onclick="newCard()">New Card</button>
   <button onclick="showAnswer()">Show Answer</button>
 
