@@ -2,30 +2,41 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Worksheet Generator</title>
+  <title>Numble - Worksheets</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Math Worksheets</h1>
+  <header>
+    <h1><span class="logo">#</span>Numble</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="worksheets.html">Worksheets</a>
+      <a href="flashcards.html">Flashcards</a>
+    </nav>
+  </header>
 
-  <label for="operation">Choose Math Type:</label>
-  <select id="operation">
-    <option value="add">Addition (+)</option>
-    <option value="sub">Subtraction (−)</option>
-    <option value="mul" selected>Multiplication (×)</option>
-    <option value="div">Division (÷)</option>
-    <option value="exp">Exponents (^)</option>
-  </select>
+  <main>
+    <h2>Generate Worksheets</h2>
 
-  <button onclick="generateWorksheet()">Generate Worksheet</button>
-  <button onclick="window.print()">Print Worksheet</button>
+    <form id="worksheetForm">
+      <fieldset>
+        <legend>Choose Math Types</legend>
+        <label><input type="checkbox" value="add"> Addition</label>
+        <label><input type="checkbox" value="sub"> Subtraction</label>
+        <label><input type="checkbox" value="mul"> Multiplication</label>
+        <label><input type="checkbox" value="div"> Division</label>
+        <label><input type="checkbox" value="exp"> Exponents</label>
+      </fieldset>
 
-  <div id="worksheet"></div>
+      <label>Number Range: <input type="number" id="startNum" value="1"> to <input type="number" id="endNum" value="12"></label><br>
+      <label>Questions per Page: <input type="number" id="questionsPerPage" value="20"></label><br>
+      <label>Pages: <input type="number" id="numPages" value="1"></label><br>
+      <button type="button" onclick="generateWorksheets()">Generate</button>
+      <button type="button" onclick="window.print()">Print</button>
+    </form>
 
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="flashcards.html">Flashcards</a>
-  </nav>
+    <div id="worksheetOutput"></div>
+  </main>
 
   <script src="script.js"></script>
 </body>

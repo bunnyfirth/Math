@@ -2,33 +2,46 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Flashcards</title>
+  <title>Numble - Flashcards</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Flashcards</h1>
+  <header>
+    <h1><span class="logo">#</span>Numble</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="worksheets.html">Worksheets</a>
+      <a href="flashcards.html">Flashcards</a>
+    </nav>
+  </header>
 
-  <label for="flashOperation">Choose Math Type:</label>
-  <select id="flashOperation">
-    <option value="add">Addition (+)</option>
-    <option value="sub">Subtraction (−)</option>
-    <option value="mul" selected>Multiplication (×)</option>
-    <option value="div">Division (÷)</option>
-    <option value="exp">Exponents (^)</option>
-  </select>
+  <main>
+    <h2>Flashcards</h2>
 
-  <div id="flashcard">
-    <p id="question">Click "New Card" to start!</p>
-    <p id="answer" style="display:none;"></p>
-  </div>
+    <form id="flashForm">
+      <fieldset>
+        <legend>Choose Math Types</legend>
+        <label><input type="checkbox" value="add"> Addition</label>
+        <label><input type="checkbox" value="sub"> Subtraction</label>
+        <label><input type="checkbox" value="mul"> Multiplication</label>
+        <label><input type="checkbox" value="div"> Division</label>
+        <label><input type="checkbox" value="exp"> Exponents</label>
+      </fieldset>
 
-  <button onclick="newCard()">New Card</button>
-  <button onclick="showAnswer()">Show Answer</button>
+      <label>Number Range: <input type="number" id="flashStart" value="1"> to <input type="number" id="flashEnd" value="12"></label><br>
+      <label>Mode:
+        <select id="flashMode">
+          <option value="digital">Digital Flashcards</option>
+          <option value="printable">Printable Flashcards</option>
+          <option value="answersheet">Answer Sheet</option>
+        </select>
+      </label><br>
 
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="worksheets.html">Worksheets</a>
-  </nav>
+      <button type="button" onclick="startFlashcards()">Start</button>
+    </form>
+
+    <div id="flashOutput"></div>
+  </main>
 
   <script src="script.js"></script>
 </body>
