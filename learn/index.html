@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Numble - Learn</title>
+    <link rel="stylesheet" href="../style.css">
+    <script src="../script.js" defer></script>
+</head>
+<body>
+<header>
+    <div class="header-left">
+        <div class="logo">#</div>
+        <div class="site-title">Numble - Learn</div>
+    </div>
+    <nav class="header-right">
+        <a href="../index.html">Home</a>
+        <a href="../worksheets.html">Worksheets</a>
+        <a href="../flashcards.html">Flashcards</a>
+        <a href="index.html" class="active">Learn</a>
+        <a href="../calculator.html">Calculator</a>
+    </nav>
+</header>
+
+<main>
+    <!-- Top tabs -->
+    <div class="tab">
+        <button class="tablinks" id="defaultTopTab" onclick="openTopic(event, 'Arithmetic')">Arithmetic</button>
+        <button class="tablinks" onclick="openTopic(event, 'Algebra')">Algebra</button>
+        <button class="tablinks" onclick="openTopic(event, 'BEDMAS')">BEDMAS</button>
+        <button class="tablinks" onclick="openTopic(event, 'LongDivision')">Long Division</button>
+        <button class="tablinks" onclick="openTopic(event, 'Roots')">Roots</button>
+        <button class="tablinks" onclick="openTopic(event, 'Exponents')">Exponents</button>
+    </div>
+
+    <!-- Arithmetic Tab -->
+    <div id="Arithmetic" class="tabcontent">
+        <h2>Arithmetic</h2>
+        <div class="mini-tabs">
+            <button class="minitablinks active" onclick="openMiniTab(event, 'Addition', 'Arithmetic')">+</button>
+            <button class="minitablinks" onclick="openMiniTab(event, 'Subtraction', 'Arithmetic')">−</button>
+            <button class="minitablinks" onclick="openMiniTab(event, 'Multiplication', 'Arithmetic')">×</button>
+            <button class="minitablinks" onclick="openMiniTab(event, 'Division', 'Arithmetic')">÷</button>
+        </div>
+
+        <div id="Addition" class="mini-tabcontent">
+            <h3>Addition</h3>
+            <p>Learn how to add numbers with examples:</p>
+            <ul>
+                <li>2 + 3 = 5</li>
+                <li>7 + 8 = 15</li>
+            </ul>
+            <p><a href="../worksheets.html">Practice Addition Worksheets</a></p>
+            <p><a href="../flashcards.html">Practice Addition Flashcards</a></p>
+        </div>
+
+        <div id="Subtraction" class="mini-tabcontent" style="display:none;">
+            <h3>Subtraction</h3>
+            <p>Learn how to subtract numbers with examples:</p>
+            <ul>
+                <li>5 − 2 = 3</li>
+                <li>12 − 7 = 5</li>
+            </ul>
+            <p><a href="../worksheets.html">Practice Subtraction Worksheets</a></p>
+            <p><a href="../flashcards.html">Practice Subtraction Flashcards</a></p>
+        </div>
+
+        <div id="Multiplication" class="mini-tabcontent" style="display:none;">
+            <h3>Multiplication</h3>
+            <p>Learn how to multiply numbers with examples:</p>
+            <ul>
+                <li>3 × 4 = 12</li>
+                <li>7 × 5 = 35</li>
+            </ul>
+            <p><a href="../worksheets.html">Practice Multiplication Worksheets</a></p>
+            <p><a href="../flashcards.html">Practice Multiplication Flashcards</a></p>
+        </div>
+
+        <div id="Division" class="mini-tabcontent" style="display:none;">
+            <h3>Division</h3>
+            <p>Learn how to divide numbers with examples:</p>
+            <ul>
+                <li>12 ÷ 3 = 4</li>
+                <li>20 ÷ 5 = 4</li>
+            </ul>
+            <p><a href="../worksheets.html">Practice Division Worksheets</a></p>
+            <p><a href="../flashcards.html">Practice Division Flashcards</a></p>
+        </div>
+    </div>
+
+    <!-- Other top tabs like Algebra, BEDMAS, Roots, Long Division, Exponents can be structured similarly -->
+</main>
+</body>
+</html>

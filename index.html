@@ -1,39 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Numble</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" href="favicon.png">
-  <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
-    header { background: #4CAF50; color: white; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; }
-    header .logo { font-weight: bold; font-size: 1.5rem; }
-    nav a { color: white; margin-left: 15px; text-decoration: none; font-weight: bold; }
-    nav a.active { text-decoration: underline; }
-    main { padding: 20px; }
-    .tab, .mini-tab { overflow: hidden; border-bottom: 2px solid #ccc; background: #f1f1f1; }
-    .tab button, .mini-tab button { background: inherit; border: none; cursor: pointer; padding: 10px 20px; transition: 0.3s; font-weight: bold; }
-    .tab button:hover, .mini-tab button:hover { background: #ddd; }
-    .tab button.active, .mini-tab button.active { background: #ccc; }
-    .tabcontent, .mini-tabcontent { display: none; padding: 15px; border: 1px solid #ccc; border-top: none; background: #fff; }
-  </style>
+    <meta charset="UTF-8">
+    <title>Numble - Home</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
-  <header>
-    <div class="logo">#Numble</div>
-    <nav>
-      <a href="index.html" class="active">Home</a>
-      <a href="worksheets.html">Worksheets</a>
-      <a href="flashcards.html">Flashcards</a>
-      <a href="learn.html">Learn</a>
-      <a href="calculator.html">Calculator</a>
+<header>
+    <div class="header-left">
+        <div class="logo">#</div>
+        <div class="site-title">Numble</div>
+    </div>
+    <nav class="header-right">
+        <a href="index.html" class="active">Home</a>
+        <a href="worksheets.html">Worksheets</a>
+        <a href="flashcards.html">Flashcards</a>
+        <a href="learn/index.html">Learn</a>
+        <a href="calculator.html">Calculator</a>
     </nav>
-  </header>
+</header>
 
-  <main>
-    <h1>Welcome to Numble</h1>
-    <p>Use the top navigation to access Worksheets, Flashcards, Learn, or Calculator.</p>
-  </main>
+<main>
+    <h1>Welcome to Numble!</h1>
+    <p>Learn and practice math with worksheets, flashcards, and interactive lessons.</p>
+
+    <div class="home-buttons">
+        <a href="worksheets.html" class="btn">Go to Worksheets</a>
+        <a href="flashcards.html" class="btn">Go to Flashcards</a>
+        <a href="learn/index.html" class="btn">Go to Learn</a>
+        <a href="calculator.html" class="btn">Open Calculator</a>
+    </div>
+</main>
 </body>
 </html>

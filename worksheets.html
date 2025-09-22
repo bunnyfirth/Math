@@ -1,47 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Numble - Worksheets</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" href="favicon.png">
+    <meta charset="UTF-8">
+    <title>Numble - Worksheets</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
-  <header>
-    <h1><span class="logo">#</span>Numble</h1>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="worksheets.html">Worksheets</a>
-      <a href="flashcards.html">Flashcards</a>
+<header>
+    <div class="header-left">
+        <div class="logo">#</div>
+        <div class="site-title">Numble - Worksheet 1-12 Multiplication</div>
+    </div>
+    <nav class="header-right">
+        <a href="index.html">Home</a>
+        <a href="worksheets.html" class="active">Worksheets</a>
+        <a href="flashcards.html">Flashcards</a>
+        <a href="learn/index.html">Learn</a>
+        <a href="calculator.html">Calculator</a>
     </nav>
-  </header>
+</header>
 
-  <main>
-    <h2>Generate Worksheets</h2>
-    <form id="worksheetForm">
-      <fieldset>
-        <legend>Choose Math Types</legend>
-        <label><input type="checkbox" value="add" checked> Addition</label>
-        <label><input type="checkbox" value="sub"> Subtraction</label>
-        <label><input type="checkbox" value="mul"> Multiplication</label>
-        <label><input type="checkbox" value="div"> Division</label>
-        <label><input type="checkbox" value="exp"> Exponents</label>
-      </fieldset>
+<main>
+    <div class="controls">
+        <label>Number of Questions: <input type="number" id="numQuestions" value="20" min="1"></label>
+        <label>Min Number: <input type="number" id="minNum" value="1"></label>
+        <label>Max Number: <input type="number" id="maxNum" value="12"></label>
+        <label>Operations:
+            <input type="checkbox" id="addOp" checked>+
+            <input type="checkbox" id="subOp" checked>−
+            <input type="checkbox" id="mulOp" checked>×
+            <input type="checkbox" id="divOp" checked>÷
+        </label>
+    </div>
 
-      <label>Number Range: <input type="number" id="startNum" value="1"> to <input type="number" id="endNum" value="12"></label><br>
-      <label>Questions per Sheet: <input type="number" id="questionsPerPage" value="20"></label><br>
-      <label>Number of Question Sheets: <input type="number" id="questionSheets" value="1"></label><br>
-      <label>Number of Answer Sheets: <input type="number" id="answerSheets" value="1"></label><br>
+    <div class="buttons">
+        <button onclick="generateWorksheet()">Generate Worksheet</button>
+        <button onclick="downloadWorksheet()">Download Worksheet</button>
+        <button onclick="downloadBoth()">Download Both</button>
+    </div>
 
-      <button type="button" onclick="generateWorksheets()">Generate Worksheets</button>
-      <button type="button" onclick="printQuestions()">Print Worksheets</button>
-      <button type="button" onclick="printAnswers()">Print Answer Sheets</button>
-      <button type="button" onclick="printBoth()">Print Both</button>
-    </form>
-
-    <div id="worksheetOutput" class="printable"></div>
-  </main>
-
-  <script src="script.js"></script>
+    <div id="worksheetArea" class="worksheet">
+        <div class="print-header">
+            <span># Numble Worksheet 1-12 Multiplication</span>
+            <span>Date: _______ Name: _______</span>
+        </div>
+    </div>
+</main>
 </body>
 </html>

@@ -52,6 +52,15 @@ function randInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+function downloadContent(filename, content) {
+    const blob = new Blob([content], { type: "text/html" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = filename;
+    link.click();
+    URL.revokeObjectURL(link.href);
+}
+
 // ===================== Worksheets =====================
 function generateWorksheet() {
     const worksheetDiv = document.getElementById("worksheetArea");
@@ -77,18 +86,14 @@ function generateWorksheet() {
     }
 }
 
-function printWorksheet() {
+function downloadWorksheet() {
     const content = document.getElementById("worksheetArea").innerHTML;
-    const w = window.open("", "", "width=800,height=600");
-    w.document.write("<html><head><title>Print Worksheet</title></head><body>");
-    w.document.write(content);
-    w.document.write("</body></html>");
-    w.document.close();
-    w.print();
+    downloadContent("Numble_Worksheet.html", content);
 }
 
-function printBoth() {
-    printWorksheet(); // placeholder, can append answer sheet separately
+function downloadBoth() {
+    const content = document.getElementById("worksheetArea").innerHTML; 
+    downloadContent("Numble_Worksheet_With_Answers.html", content);
 }
 
 // ===================== Flashcards =====================
@@ -125,12 +130,7 @@ function generateFlashcards() {
     flashcardDiv.appendChild(table);
 }
 
-function printFlashcards() {
+function downloadFlashcards() {
     const content = document.getElementById("flashcardArea").innerHTML;
-    const w = window.open("", "", "width=800,height=600");
-    w.document.write("<html><head><title>Print Flashcards</title></head><body>");
-    w.document.write(content);
-    w.document.write("</body></html>");
-    w.document.close();
-    w.print();
+    downloadContent("Numble_Flashcards.html", content);
 }

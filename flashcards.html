@@ -1,42 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Numble - Flashcards</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" href="favicon.png">
+    <meta charset="UTF-8">
+    <title>Numble - Flashcards</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
-  <header>
-    <h1><span class="logo">#</span>Numble</h1>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="worksheets.html">Worksheets</a>
-      <a href="flashcards.html">Flashcards</a>
+<header>
+    <div class="header-left">
+        <div class="logo">#</div>
+        <div class="site-title">Numble - FLASHCARDS: 1-10 ADDITION</div>
+    </div>
+    <nav class="header-right">
+        <a href="index.html">Home</a>
+        <a href="worksheets.html">Worksheets</a>
+        <a href="flashcards.html" class="active">Flashcards</a>
+        <a href="learn/index.html">Learn</a>
+        <a href="calculator.html">Calculator</a>
     </nav>
-  </header>
+</header>
 
-  <main>
-    <h2>Flashcards</h2>
-    <form id="flashForm">
-      <fieldset>
-        <legend>Choose Math Types</legend>
-        <label><input type="checkbox" value="add" checked> Addition</label>
-        <label><input type="checkbox" value="sub"> Subtraction</label>
-        <label><input type="checkbox" value="mul"> Multiplication</label>
-        <label><input type="checkbox" value="div"> Division</label>
-        <label><input type="checkbox" value="exp"> Exponents</label>
-      </fieldset>
+<main>
+    <div class="controls">
+        <label>Number of Flashcards: <input type="number" id="numFlashcards" value="10" min="1"></label>
+        <label>Min Number: <input type="number" id="minNum" value="1"></label>
+        <label>Max Number: <input type="number" id="maxNum" value="10"></label>
+    </div>
 
-      <label>Number Range: <input type="number" id="flashStart" value="1"> to <input type="number" id="flashEnd" value="10"></label><br>
-      <label>Number of Flashcards per Sheet: <input type="number" id="flashPerSheet" value="20"></label><br>
-      <button type="button" onclick="generateFlashcards()">Generate Printable Flashcards</button>
-      <button type="button" onclick="generateOnlineFlashcards()">Start Online Flashcards</button>
-    </form>
+    <div class="buttons">
+        <button onclick="generateFlashcards()">Generate Flashcards</button>
+        <button onclick="downloadFlashcards()">Download Flashcards</button>
+    </div>
 
-    <div id="flashOutput" class="printable"></div>
-  </main>
-
-  <script src="script.js"></script>
+    <div id="flashcardArea" class="flashcard">
+        <div class="print-header">
+            <span>FLASHCARDS: 1-10 ADDITION</span>
+        </div>
+    </div>
+</main>
 </body>
 </html>
