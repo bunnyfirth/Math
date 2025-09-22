@@ -1,155 +1,136 @@
-let lastGenerated = { problems: [], questionsPerSheet: 20 };
-
-// --- UTILITIES ---
-function randInt(min,max){return Math.floor(Math.random()*(max-min+1))+min;}
-function getRandomProblem(selectedOps,start,end){
-  const op = selectedOps[Math.floor(Math.random()*selectedOps.length)];
-  const a = randInt(start,end);
-  const b = randInt(start,end);
-  let q="", ans=0;
-  switch(op){
-    case"add": q=`${a} + ${b} =`; ans=a+b; break;
-    case"sub": q=`${a+b} - ${a} =`; ans=b; break;
-    case"mul": q=`${a} × ${b} =`; ans=a*b; break;
-    case"div": q=`${a*b} ÷ ${a} =`; ans=b; break;
-    case"exp": q=`${a} ^ 2 =`; ans=a**2; break;
-  }
-  return {q, a};
+// ===================== Learn Tabs =====================
+function openTopic(evt, topicName) {
+    const tabcontent = document.getElementsByClassName("tabcontent");
+    for (let i = 0; i < tabcontent.length; i++) tabcontent[i].style.display = "none";
+    const tablinks = document.getElementsByClassName("tablinks");
+    for (let i = 0; i < tablinks.length; i++) tablinks[i].className = tablinks[i].className.replace(" active", "");
+    document.getElementById(topicName).style.display = "block";
+    evt.currentTarget.className += " active";
 }
 
-// --- WORKSHEETS ---
-function generateWorksheets(){
-  const ops = [...document.querySelectorAll('#worksheetForm input[type=checkbox]:checked')].map(c=>c.value);
-  const start = parseInt(document.getElementById("startNum").value);
-  const end = parseInt(document.getElementById("endNum").value);
-  const questionsPerSheet = parseInt(document.getElementById("questionsPerPage").value);
-  const questionSheets = parseInt(document.getElementById("questionSheets").value);
+function openMiniTab(evt, miniName, topTab) {
+    const miniTabContent = document.getElementById(topTab).getElementsByClassName("mini-tabcontent");
+    for (let i = 0; i < miniTabContent.length; i++) miniTabContent[i].style.display = "none";
+    const miniTabLinks = document.getElementById(topTab).getElementsByClassName("minitablinks");
+    for (let i = 0; i < miniTabLinks.length; i++) miniTabLinks[i].className = miniTabLinks[i].className.replace(" active", "");
+    document.getElementById(miniName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
 
-  const output = document.getElementById("worksheetOutput");
-  output.innerHTML = "";
-  lastGenerated.problems = [];
-  lastGenerated.questionsPerSheet = questionsPerSheet;
+document.addEventListener("DOMContentLoaded", function () {
+    const defaultTab = document.getElementById("defaultTopTab");
+    if(defaultTab) defaultTab.click();
+});
 
-  const opNames = ops.map(o=>o.charAt(0).toUpperCase()+o.slice(1)).join(", ");
+// ===================== Calculator =====================
+let calcSteps = [];
+let calcIndex = 0;
 
-  for(let s=0; s<questionSheets; s++){
-    const sheetDiv = document.createElement("div");
-    sheetDiv.className="worksheet";
-    sheetDiv.innerHTML = `<h2># Numble Worksheet ${start}-${end} ${opNames}</h2>`;
-    const grid = document.createElement("div");
-    grid.className="problem-grid";
-
-    for(let i=0;i<questionsPerSheet;i++){
-      const prob = getRandomProblem(ops,start,end);
-      lastGenerated.problems.push(prob);
-      const div = document.createElement("div"); div.className="problem"; div.textContent=prob.q;
-      grid.appendChild(div);
+function startCalc() {
+    const input = document.getElementById("calcInput").value;
+    try {
+        const evalResult = math.evaluate(input);
+        calcSteps = [`Original: ${input}`, `Solution: ${evalResult}`]; 
+        calcIndex = 0;
+        document.getElementById("calcStep").textContent = calcSteps[calcIndex];
+    } catch (err) {
+        alert("Invalid input!");
     }
-    sheetDiv.appendChild(grid);
-    output.appendChild(sheetDiv);
-  }
 }
 
-function printQuestions(){ printContent("#worksheetOutput"); }
-function printAnswers(){ printContent("#worksheetOutput",true); }
-function printBoth(){ printQuestions(); setTimeout(printAnswers,500); }
-
-function printContent(selector,showAnswers=false){
-  const el = document.querySelector(selector);
-  const clone = el.cloneNode(true);
-  if(showAnswers){
-    clone.querySelectorAll(".problem").forEach((p,i)=>{
-      p.textContent += " " + lastGenerated.problems[i].a;
-    });
-  }
-  const w = window.open("","_blank");
-  w.document.write("<html><head><title>Print</title><link rel='stylesheet' href='style.css'></head><body>");
-  w.document.write(clone.outerHTML);
-  w.document.write("</body></html>");
-  w.document.close(); w.focus(); w.print();
-}
-
-// --- FLASHCARDS ---
-let onlineCards = [];
-let currentIndex = 0;
-
-function generateFlashcards(){
-  const ops = [...document.querySelectorAll('#flashForm input[type=checkbox]:checked')].map(c=>c.value);
-  const start = parseInt(document.getElementById("flashStart").value);
-  const end = parseInt(document.getElementById("flashEnd").value);
-  const output = document.getElementById("flashOutput");
-  output.innerHTML="";
-
-  // Generate all combinations in range
-  let cards = [];
-  for(let op of ops){
-    for(let i=start;i<=end;i++){
-      for(let j=start;j<=end;j++){
-        let prob;
-        switch(op){
-          case"add": prob={q:`${i} + ${j} =`,a:i+j}; break;
-          case"sub": prob={q:`${i+j} - ${i} =`,a:j}; break;
-          case"mul": prob={q:`${i} × ${j} =`,a:i*j}; break;
-          case"div": prob={q:`${i*j} ÷ ${i} =`,a:j}; break;
-          case"exp": prob={q:`${i} ^ 2 =`,a:i**2}; break;
-        }
-        cards.push(prob);
-      }
+function nextCalcStep() {
+    calcIndex++;
+    if(calcIndex < calcSteps.length){
+        document.getElementById("calcStep").textContent = calcSteps[calcIndex];
+    } else {
+        document.getElementById("calcStep").textContent = "Solved!";
     }
-  }
-
-  // Build printable table
-  const header = document.createElement("div");
-  header.innerHTML = `<h2># Numble</h2><h3>FLASHCARDS: ${start}-${end} ${ops.map(o=>o.toUpperCase()).join(", ")}</h3>`;
-  output.appendChild(header);
-
-  const table = document.createElement("table");
-  table.className="flash-table";
-  const trHead = document.createElement("tr");
-  trHead.innerHTML="<th>QUESTION</th><th>ANSWER</th>";
-  table.appendChild(trHead);
-
-  cards.forEach(card=>{
-    const tr = document.createElement("tr");
-    tr.innerHTML=`<td>${card.q}</td><td>${card.a}</td>`;
-    table.appendChild(tr);
-  });
-
-  output.appendChild(table);
-  const btn = document.createElement("button");
-  btn.textContent="Print Flashcards"; btn.onclick=()=>printContent("#flashOutput");
-  output.appendChild(btn);
 }
 
-function generateOnlineFlashcards(){
-  const ops = [...document.querySelectorAll('#flashForm input[type=checkbox]:checked')].map(c=>c.value);
-  const start = parseInt(document.getElementById("flashStart").value);
-  const end = parseInt(document.getElementById("flashEnd").value);
-  const output = document.getElementById("flashOutput");
-  output.innerHTML="";
-  onlineCards = [];
-  currentIndex = 0;
-
-  for(let i=0;i<20;i++) onlineCards.push(getRandomProblem(ops,start,end));
-
-  const header = document.createElement("div");
-  header.innerHTML = `<h2># Numble</h2>`;
-  output.appendChild(header);
-
-  const cardDiv = document.createElement("div");
-  cardDiv.id="onlineCard"; cardDiv.style.fontSize="1.5rem"; cardDiv.style.margin="20px";
-  output.appendChild(cardDiv);
-
-  const btnPrev = document.createElement("button"); btnPrev.textContent="Previous"; btnPrev.onclick=prevCard;
-  const btnNext = document.createElement("button"); btnNext.textContent="Next"; btnNext.onclick=nextCard;
-  output.appendChild(btnPrev); output.appendChild(btnNext);
-
-  showOnlineCard();
+// ===================== Utilities =====================
+function randInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function showOnlineCard(){
-  document.getElementById("onlineCard").textContent = onlineCards[currentIndex].q;
+// ===================== Worksheets =====================
+function generateWorksheet() {
+    const worksheetDiv = document.getElementById("worksheetArea");
+    worksheetDiv.innerHTML = `<div class="print-header">
+        <span># Numble Worksheet</span>
+        <span>Date: _______ Name: _______</span>
+    </div>`;
+    
+    const numQuestions = parseInt(document.getElementById("numQuestions")?.value) || 20;
+    const operations = ["+", "-", "×", "÷"];
+    const minNum = parseInt(document.getElementById("minNum")?.value) || 1;
+    const maxNum = parseInt(document.getElementById("maxNum")?.value) || 12;
+
+    for (let i = 1; i <= numQuestions; i++) {
+        const op = operations[randInt(0, operations.length - 1)];
+        let a = randInt(minNum, maxNum);
+        let b = randInt(minNum, maxNum);
+        if(op === "÷") { b = randInt(1, maxNum); a = b * randInt(1, maxNum); }
+        let q = `${a} ${op} ${b}`;
+        let p = document.createElement("p");
+        p.textContent = `${i}. ${q} = ________`;
+        worksheetDiv.appendChild(p);
+    }
 }
 
-function nextCard(){ if(currentIndex<onlineCards.length-1){currentIndex++; showOnlineCard();}}
-function prevCard(){ if(currentIndex>0){currentIndex--; showOnlineCard();}}
+function printWorksheet() {
+    const content = document.getElementById("worksheetArea").innerHTML;
+    const w = window.open("", "", "width=800,height=600");
+    w.document.write("<html><head><title>Print Worksheet</title></head><body>");
+    w.document.write(content);
+    w.document.write("</body></html>");
+    w.document.close();
+    w.print();
+}
+
+function printBoth() {
+    printWorksheet(); // placeholder, can append answer sheet separately
+}
+
+// ===================== Flashcards =====================
+function generateFlashcards() {
+    const flashcardDiv = document.getElementById("flashcardArea");
+    flashcardDiv.innerHTML = `<div class="print-header">
+        <span>FLASHCARDS 1-10 ADDITION</span>
+    </div>`;
+    
+    const numCards = parseInt(document.getElementById("numFlashcards")?.value) || 10;
+    const minNum = parseInt(document.getElementById("minNum")?.value) || 1;
+    const maxNum = parseInt(document.getElementById("maxNum")?.value) || 10;
+
+    const table = document.createElement("table");
+    table.style.width = "100%";
+    table.style.borderCollapse = "collapse";
+    table.border = "1";
+
+    const headerRow = document.createElement("tr");
+    const th1 = document.createElement("th"); th1.textContent="QUESTION"; headerRow.appendChild(th1);
+    const th2 = document.createElement("th"); th2.textContent="ANSWER"; headerRow.appendChild(th2);
+    table.appendChild(headerRow);
+
+    for(let i=1;i<=numCards;i++){
+        const a = randInt(minNum,maxNum);
+        const b = randInt(minNum,maxNum);
+        const q = `${a} + ${b}`;
+        const tr = document.createElement("tr");
+        const tdQ = document.createElement("td"); tdQ.textContent=q; tr.appendChild(tdQ);
+        const tdA = document.createElement("td"); tdA.textContent=a+b; tr.appendChild(tdA);
+        table.appendChild(tr);
+    }
+
+    flashcardDiv.appendChild(table);
+}
+
+function printFlashcards() {
+    const content = document.getElementById("flashcardArea").innerHTML;
+    const w = window.open("", "", "width=800,height=600");
+    w.document.write("<html><head><title>Print Flashcards</title></head><body>");
+    w.document.write(content);
+    w.document.write("</body></html>");
+    w.document.close();
+    w.print();
+}
